@@ -7,11 +7,11 @@ import './SunActivityPage.css';
 
 class SunActivityPage extends Component {
     render () {
-        const { getCoordinates, userSunriseAndSunset } = this.props;
+        const { onSubmit, userSunriseAndSunset } = this.props;
         return (
             <div className="page page__sun-activity">
                 <LocationAndDateForm
-                    getCoordinates={ getCoordinates } />
+                    onSubmit={ onSubmit } />
                 <SunActivity
                     userSunriseAndSunset={ userSunriseAndSunset }/>
             </div>
@@ -27,7 +27,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getCoordinates: (data) => dispatch(getCoordinates(data))
+        onSubmit: (data) => dispatch(getCoordinates(data))
     };
 };
 
