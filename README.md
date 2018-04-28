@@ -1,2 +1,1 @@
-# sunrise-and-sunset
-React + Redux web app
+This web app will display a users sunrise and sunset time. This web app is based off the create react app: https://github.com/facebook/create-react-app
