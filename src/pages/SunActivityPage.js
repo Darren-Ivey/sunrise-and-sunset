@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getUserSunriseAndSunset, getCoordinates } from 'modules/sunActivity';
+import { getUserSunriseAndSunset, getCoordinates } from '../modules/sunActivity';
 import LocationAndDateForm from '../components/LocationAndDateForm/LocationAndDateForm';
 import SunActivity from '../components/SunActivity/SunActivity';
-import 'sunActivityPage.css';
+import './SunActivityPage.css';
 
-class sunActivityPage extends Component {
+class SunActivityPage extends Component {
     render () {
         const { getCoordinates, userSunriseAndSunset } = this.props;
         return (
@@ -31,4 +31,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(sunActivityPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SunActivityPage);

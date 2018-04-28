@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 import { fetchCoordinates } from '../services/services';
-import { call, put } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 
 // actions
 export const GET_COORDINATES = 'GET_COORDINATES';
@@ -69,4 +69,9 @@ export function* watchSunActivitySaga () {
 }
 
 // selectors
-export const getUserSunriseAndSunset = (state) => state.tactics.profileTactics;
+export const getUserSunriseAndSunset = (state) => {
+    return ({
+        sunrise: state.sunActivity.sunrise,
+        sunset: state.sunActivity.sunset
+    });
+}

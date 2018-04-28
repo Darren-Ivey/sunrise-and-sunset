@@ -1,4 +1,5 @@
 import React from 'react';
+import SunActivityPage from './pages/SunActivityPage';
 import './App.css';
 
 const App = () =>
