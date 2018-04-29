@@ -41,6 +41,7 @@ export default(state = INITIAL_STATE, action) => {
         case GET_COORDINATES_SUCCESS:
             const { latitude, longitude } = payload.result;
             const sunActivity = SunCalc.getTimes(moment(state.selectedDate).toDate(), latitude, longitude);
+            console.log(sunActivity)
             return {
                 ...state,
                 status: 'received',
@@ -84,6 +85,6 @@ export function* watchSunActivitySaga () {
 }
 
 // selectors
-export const getSunrise = (state) => state.sunActivity.sunrise ? moment(state.sunActivity.sunrise).format("hh:mm"): undefined;
-export const getSunset = (state) => state.sunActivity.sunrise ? moment(state.sunActivity.sunset).format("hh:mm"): undefined;
+export const getSunrise = (state) => state.sunActivity.sunrise ? moment(state.sunActivity.sunrise).format("HH:mm"): undefined;
+export const getSunset = (state) => state.sunActivity.sunrise ? moment(state.sunActivity.sunset).format("HH:mm"): undefined;
 export const getError = (state) => state.sunActivity.error;
