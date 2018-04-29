@@ -42,6 +42,7 @@
 }
 
 .error__message {
+    margin: 0 0 24px 0;
     color: orangered;
 }
 
