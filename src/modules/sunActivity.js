@@ -46,7 +46,8 @@ export default(state = INITIAL_STATE, action) => {
                 ...state,
                 status: 'received',
                 sunrise: sunActivity.sunrise,
-                sunset: sunActivity.sunset
+                sunset: sunActivity.sunset,
+                error: undefined
             };
 
         case GET_COORDINATES_FAILED:
