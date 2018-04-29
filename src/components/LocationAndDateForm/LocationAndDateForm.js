@@ -22,11 +22,11 @@ class LocationAndDateForm extends Component {
             <form onSubmit={ this.handleSubmit.bind(this) }>
                 <fieldset>
                     <label className="field__label" htmlFor="postCode">Postcode</label>
-                    <input required type="text" id="postCode" className="field__input field__input--text"  maxLength="6"
-                           ref={ (c) => { this.fields.reference = c; } } />
+                    <input required type="text" id="postCode" className="field__input field__input--text"  maxLength="8"
+                           ref={ (c) => { this.fields.postcode = c; } } />
                     <label className="field__label" htmlFor="date">Date</label>
                     <input required type="date" id="date" className="field__input field__input--date"
-                           ref={ (c) => { this.fields.reference = c; } } />
+                           ref={ (c) => { this.fields.date = c; } } />
                 </fieldset>
                 <footer>
                     <button type="submit">Find</button>

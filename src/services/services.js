@@ -1,4 +1,10 @@
 
+const catchError = (response) => {
+    if (!response.ok) {
+        throw { error: response.status };
+    }
+    return response;
+};
 
 const getOptions = {
     method: 'GET',
@@ -7,10 +13,7 @@ const getOptions = {
     }
 };
 
-export const fetchCoordinates = ({ postCode }) => {
-    return fetch(`api.postcodes.io/postcodes?q=${ postCode }`, getOptions)
+export const fetchCoordinates = ({ postcode }) =>
+    fetch(`https://api.postcodes.io/postcodes/${ postcode }`, getOptions)
+        .then(catchError)
         .then(r => r.json())
-        .catch(error => console.log({
-            code: error
-        }))
-};

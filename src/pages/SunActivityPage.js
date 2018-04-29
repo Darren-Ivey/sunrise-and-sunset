@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getUserSunriseAndSunset, getCoordinates } from '../modules/sunActivity';
+import { getUserSunriseAndSunset, submitLocationAndDateForm } from '../modules/sunActivity';
 import LocationAndDateForm from '../components/LocationAndDateForm/LocationAndDateForm';
 import SunActivity from '../components/SunActivity/SunActivity';
 import './SunActivityPage.css';
@@ -27,7 +27,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSubmit: (data) => dispatch(getCoordinates(data))
+        onSubmit: (data) => dispatch(submitLocationAndDateForm(data))
     };
 };
 

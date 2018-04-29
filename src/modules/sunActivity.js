@@ -1,8 +1,12 @@
 import { createAction } from 'redux-actions';
 import { fetchCoordinates } from '../services/services';
 import { call, put, takeLatest } from 'redux-saga/effects';
+import SunCalc from 'suncalc';
+import moment from 'moment';
 
 // actions
+export const SUBMIT_LOCATION_AND_DATE = 'SUBMIT_LOCATION_AND_DATE';
+
 export const GET_COORDINATES = 'GET_COORDINATES';
 export const GET_COORDINATES_SUCCESS = 'GET_COORDINATES_SUCCESS';
 export const GET_COORDINATES_FAILED  = 'GET_COORDINATES_FAILED';
@@ -11,7 +15,7 @@ export const GET_COORDINATES_FAILED  = 'GET_COORDINATES_FAILED';
 const INITIAL_STATE = {
     status: 'uninitiated',
     error: undefined,
-    coordinates: undefined,
+    selectedDate: undefined,
     sunrise: undefined,
     sunset: undefined
 };
@@ -22,6 +26,12 @@ export default(state = INITIAL_STATE, action) => {
 
     switch (type) {
 
+        case SUBMIT_LOCATION_AND_DATE:
+            return {
+                ...state,
+                selectedDate: payload.date
+            };
+
         case GET_COORDINATES:
             return {
                 ...state,
@@ -29,17 +39,22 @@ export default(state = INITIAL_STATE, action) => {
             };
 
         case GET_COORDINATES_SUCCESS:
+            const { latitude, longitude } = payload.result;
+            const sunActivity = SunCalc.getTimes(moment(state.selectedDate).toDate(), latitude, longitude);
             return {
                 ...state,
                 status: 'received',
-                coordinates: payload
+                sunrise: sunActivity.sunrise,
+                sunset: sunActivity.sunset
             };
 
         case GET_COORDINATES_FAILED:
             return {
                 ...state,
                 status: 'failed',
-                error: 'failed'
+                error: 'failed',
+                sunrise: undefined,
+                sunset: undefined
             };
 
         default:
@@ -51,13 +66,13 @@ export default(state = INITIAL_STATE, action) => {
 export const getCoordinates = createAction(GET_COORDINATES);
 export const getCoordinatesSuccess = createAction(GET_COORDINATES_SUCCESS);
 export const getCoordinatesFailed = createAction(GET_COORDINATES_FAILED);
+export const submitLocationAndDateForm = createAction(SUBMIT_LOCATION_AND_DATE);
 
 // sagas
 export function* getCoordinatesSaga ({ payload: { postcode }}) {
-
+    yield put(getCoordinates());
     try {
         const response = yield call(fetchCoordinates, { postcode });
-
         yield put(getCoordinatesSuccess(response));
     } catch (error) {
         yield put(getCoordinatesFailed(error));
@@ -65,7 +80,7 @@ export function* getCoordinatesSaga ({ payload: { postcode }}) {
 }
 
 export function* watchSunActivitySaga () {
-    yield takeLatest(GET_COORDINATES, getCoordinatesSaga);
+    yield takeLatest(SUBMIT_LOCATION_AND_DATE, getCoordinatesSaga);
 }
 
 // selectors
