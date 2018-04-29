@@ -9,7 +9,10 @@ class SunActivityPage extends Component {
     render () {
         const { onSubmit, sunrise, sunset, error } = this.props;
         return (
-            <div className="page page__sun-activity">
+            <div className="page-sun-activity">
+                <h1 className="page-sun-activity__header">
+                    Sunrise and Sunset
+                </h1>
                 <LocationAndDateForm
                     onSubmit={ onSubmit }
                     error={ error } />
