@@ -52,7 +52,7 @@ export default(state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 status: 'failed',
-                error: 'failed',
+                error: payload.error ? payload.error : payload,
                 sunrise: undefined,
                 sunset: undefined
             };
@@ -84,9 +84,6 @@ export function* watchSunActivitySaga () {
 }
 
 // selectors
-export const getUserSunriseAndSunset = (state) => {
-    return ({
-        sunrise: state.sunActivity.sunrise,
-        sunset: state.sunActivity.sunset
-    });
-}
+export const getSunrise = (state) => state.sunActivity.sunrise ? moment(state.sunActivity.sunrise).format("hh:mm"): undefined;
+export const getSunset = (state) => state.sunActivity.sunrise ? moment(state.sunActivity.sunset).format("hh:mm"): undefined;
+export const getError = (state) => state.sunActivity.error;

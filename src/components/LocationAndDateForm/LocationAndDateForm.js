@@ -3,7 +3,7 @@ import { mapValues } from 'lodash/object';
 
 class LocationAndDateForm extends Component {
 
-    constructor(props) {
+    constructor (props) {
         super(props);
         this.fields = {};
     }
@@ -15,6 +15,28 @@ class LocationAndDateForm extends Component {
     handleSubmit (e) {
         e.preventDefault();
         this.props.onSubmit(this.gatherData());
+    }
+
+    renderInputError () {
+        return (
+            <div>
+                <p>Sorry, we can't find a location for that postcode. Please check your postcode is valid or try another.</p>
+            </div>
+        )
+    }
+
+    renderServiceError () {
+        return (
+            <div>
+                <p>Please try again.</p>
+            </div>
+        )
+    }
+
+    handleError () {
+        if (this.props.error) {
+            return this.props.error === 404 ? this.renderInputError() : this.renderServiceError();
+        }
     }
 
     render () {
@@ -29,6 +51,7 @@ class LocationAndDateForm extends Component {
                            ref={ (c) => { this.fields.date = c; } } />
                 </fieldset>
                 <footer>
+                    { this.handleError() }
                     <button type="submit">Find</button>
                 </footer>
             </form>

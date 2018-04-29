@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getUserSunriseAndSunset, submitLocationAndDateForm } from '../modules/sunActivity';
+import { getError, getSunrise, getSunset, submitLocationAndDateForm } from '../modules/sunActivity';
 import LocationAndDateForm from '../components/LocationAndDateForm/LocationAndDateForm';
 import SunActivity from '../components/SunActivity/SunActivity';
 import './SunActivityPage.css';
 
 class SunActivityPage extends Component {
     render () {
-        const { onSubmit, userSunriseAndSunset } = this.props;
+        const { onSubmit, sunrise, sunset, error } = this.props;
         return (
             <div className="page page__sun-activity">
                 <LocationAndDateForm
-                    onSubmit={ onSubmit } />
+                    onSubmit={ onSubmit }
+                    error={ error } />
                 <SunActivity
-                    userSunriseAndSunset={ userSunriseAndSunset }/>
+                    sunrise={ sunrise }
+                    sunset={ sunset } />
             </div>
         )
     }
@@ -21,7 +23,9 @@ class SunActivityPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        userSunriseAndSunset: getUserSunriseAndSunset(state)
+        sunrise: getSunrise(state),
+        sunset: getSunset(state),
+        error: getError(state)
     };
 };
 
