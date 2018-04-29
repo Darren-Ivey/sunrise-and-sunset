@@ -41,7 +41,6 @@ export default(state = INITIAL_STATE, action) => {
         case GET_COORDINATES_SUCCESS:
             const { latitude, longitude } = payload.result;
             const sunActivity = SunCalc.getTimes(moment(state.selectedDate).toDate(), latitude, longitude);
-            console.log(sunActivity)
             return {
                 ...state,
                 status: 'received',
