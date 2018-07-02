@@ -31,7 +31,6 @@ class SunActivityPage extends React.Component<{}, State> {
 
         fetchCoordinates(postcode)
             .then((response: any) => {
-                console.log(response);
                 return {
                     formattedDate: moment(date).toDate(),
                     latitude: response.result.latitude,
