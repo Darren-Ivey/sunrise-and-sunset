@@ -1,10 +1,15 @@
-import React from 'react';
-import SunActivityPage from './pages/SunActivityPage';
+import * as React from 'react';
 import './App.css';
+import SunActivityPage from './pages/SunActivityPage';
 
-const App = () =>
-    <div className="App">
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
         <SunActivityPage />
-    </div>
+      </div>
+    );
+  }
+}
 
 export default App;

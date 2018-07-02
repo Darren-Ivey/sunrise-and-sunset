@@ -1,19 +1,27 @@
+// @flow
 
-const catchError = (response) => {
+const catchError = (response: any) => {
     if (!response.ok) {
-        throw { error: response.status };
+        switch (response.status) {
+            case 401:
+                throw { error: "UNAUTHENTICATED" };
+            case 404:
+                throw { error: "NOT_FOUND" };
+            default:
+                throw { error: "UNKNOWN_API_ERROR" };
+        }
     }
     return response;
 };
 
 const getOptions = {
-    method: 'GET',
     headers: {
         "Content-Type": "application/json"
-    }
+    },
+    method: 'GET'
 };
 
-export const fetchCoordinates = ({ postcode }) =>
+export const fetchCoordinates = (postcode: string) =>
     fetch(`https://api.postcodes.io/postcodes/${ postcode }`, getOptions)
-        .then(catchError)
-        .then(r => r.json())
+        .then((res) => catchError(res))
+        .then(res => res.json());

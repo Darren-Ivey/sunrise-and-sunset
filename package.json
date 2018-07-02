@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-flow": "^6.23.0",
+    "flow-bin": "^0.75.0",
     "react-scripts": "0.8.4"
   },
   "dependencies": {
@@ -20,9 +23,11 @@
     "suncalc": "^1.8.0"
   },
   "scripts": {
+    "build": "babel src/ -d lib/",
+    "prepublish": "npm run build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "flow": "flow"
   }
 }
