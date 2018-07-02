@@ -1,18 +1,10 @@
 // @flow
 
-import * as moment from 'moment';
+import moment from 'moment';
 import * as React from 'react';
 import './SunActivity.css'
 
-
-type Props = {
-    sunActivity: {
-        sunrise: string,
-        sunset: string
-    }
-}
-
-const SunActivity = ( props: Props) => {
+const SunActivity = (props: { sunActivity: { sunrise: string, sunset: string } }) => {
     const { sunrise, sunset } = props.sunActivity;
     const render = () => {
         return (

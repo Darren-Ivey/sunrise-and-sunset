@@ -1,6 +1,5 @@
-// @flow
 
-const catchError = (response: any) => {
+const catchError = (response) => {
     if (!response.ok) {
         switch (response.status) {
             case 401:
@@ -21,7 +20,7 @@ const getOptions = {
     method: 'GET'
 };
 
-export const fetchCoordinates = (postcode: string) =>
+export const fetchCoordinates = (postcode) =>
     fetch(`https://api.postcodes.io/postcodes/${ postcode }`, getOptions)
         .then((res) => catchError(res))
         .then(res => res.json());

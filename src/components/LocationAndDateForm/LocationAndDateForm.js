@@ -1,15 +1,15 @@
 // @flow
 
 import * as _ from 'lodash';
-import React from 'react';
+import * as React from 'react';
 import './LocationAndDateForm.css';
 
 type Props = {
-    getSunActivity: any,
-    error: string | boolean
+    error: string | boolean,
+    getSunActivity: any
 }
 
-class LocationAndDateForm extends React.Component<Props> {
+class LocationAndDateForm extends React.Component<Props, {}> {
 
     fields: {
         postcodeInput: ?{},
@@ -22,7 +22,7 @@ class LocationAndDateForm extends React.Component<Props> {
             postcodeInput: {},
             dateInput: {}
         };
-        (this: any).handleSubmit = this.handleSubmit.bind(this);
+        (this:any).handleSubmit = this.handleSubmit.bind(this);
     }
 
     gatherData () {

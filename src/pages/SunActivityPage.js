@@ -1,8 +1,8 @@
 // @flow
 
-import * as moment from 'moment';
+import moment from 'moment';
 import * as React from 'react';
-import * as SunCalc from 'suncalc';
+import SunCalc from 'suncalc';
 import LocationAndDateForm from '../components/LocationAndDateForm/LocationAndDateForm';
 import SunActivity from '../components/SunActivity/SunActivity';
 import { fetchCoordinates } from '../services/services';
@@ -21,24 +21,24 @@ class SunActivityPage extends React.Component<{}, State> {
             coordinatesError: false,
             sunActivity: {},
         };
+
+        (this: any).getSunActivity = this.getSunActivity.bind(this);
     }
 
     getSunActivity (args: {postcode: string, date: string}) {
 
-        console.log("args", args)
-
-        const postcode = args.postcode;
-        const date = args.date;
+        const { postcode, date } = args;
 
         fetchCoordinates(postcode)
-            .then((response) => {
+            .then((response: any) => {
+                console.log(response);
                 return {
                     formattedDate: moment(date).toDate(),
                     latitude: response.result.latitude,
                     longitude: response.result.longitude
                 }
             })
-            .then((data) => {
+            .then((data: any) => {
                 this.setState({
                     coordinatesError: false,
                     sunActivity: SunCalc.getTimes(data.formattedDate, data.latitude, data.longitude),
@@ -61,7 +61,7 @@ class SunActivityPage extends React.Component<{}, State> {
                 </h1>
                 <LocationAndDateForm
                     error={coordinatesError}
-                    getSunActivity={()=> { this.getSunActivity }} />
+                    getSunActivity={this.getSunActivity} />
                 <SunActivity
                     sunActivity={sunActivity} />
             </div>
